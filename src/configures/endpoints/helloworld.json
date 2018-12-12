@@ -1,0 +1,5 @@
+{
+  "ServiceName": "helloworld",
+  "ServicePath": "/hello",
+  "ServiceTarget": "/users/getusers"
+}
