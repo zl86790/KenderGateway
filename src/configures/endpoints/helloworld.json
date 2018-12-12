@@ -1,5 +1,6 @@
 {
   "ServiceName": "helloworld",
   "ServicePath": "/hello",
-  "ServiceTarget": "/users/getusers"
+  "TargetHost": "http://10.10.8.73:3000",
+  "TargetPath": "/users/getusers"
 }

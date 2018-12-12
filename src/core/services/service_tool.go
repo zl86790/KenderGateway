@@ -1,7 +1,6 @@
 package services
 
 import (
-	"container/list"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -11,27 +10,27 @@ import (
 	"../tools/files"
 )
 
-func ReadConfigs(path string) (*list.List, error) {
-	results := list.New()
+func ReadConfigs(path string) (map[string]ServiceModel, error) {
+	var results map[string]ServiceModel = map[string]ServiceModel{}
 	files := files.GetAllFile(path)
 	for file := files.Front(); file != nil; file = file.Next() {
 		fmt.Println("reading => " + file.Value.(string))
 		fileName := file.Value.(string)
 		f, ferr := os.Open(fileName)
 		if ferr != nil {
-			return list.New(), ferr
+			return map[string]ServiceModel{}, ferr
 		}
 		content, cerr := ioutil.ReadAll(f)
 		if cerr != nil {
-			return list.New(), cerr
+			return map[string]ServiceModel{}, cerr
 		}
 		log.Println(string(content))
 		serviceModel := ServiceModel{}
 		serr := json.Unmarshal(content, &serviceModel)
 		if serr != nil {
-			return list.New(), serr
+			return map[string]ServiceModel{}, serr
 		}
-		results.PushBack(serviceModel)
+		results[serviceModel.ServicePath] = serviceModel
 	}
 	return results, nil
 }
