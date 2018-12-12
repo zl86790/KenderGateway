@@ -1,0 +1,6 @@
+{
+  "ServiceName": "validation",
+  "ServicePath": "/validate",
+  "TargetHost": "http://10.10.8.73:3000",
+  "TargetPath": "/users/validate"
+}
